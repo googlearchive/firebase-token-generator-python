@@ -85,7 +85,7 @@ def _create_options_claims(opts):
 
 def _encode(bytes):
     encoded = urlsafe_b64encode(bytes)
-    return str(encoded).replace('=', '')
+    return encoded.decode('utf-8').replace('=', '')
 
 def _encode_json(obj):
     return _encode(bytearray(json.dumps(obj), 'utf-8'))
