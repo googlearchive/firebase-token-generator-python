@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='firebase-token-generator',
-    version='1.0',
+    version='1.1',
     author='Greg Soltis',
     author_email='greg@firebase.com',
     py_modules=['firebase_token_generator'],
