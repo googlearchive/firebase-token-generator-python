@@ -7,7 +7,7 @@ setup(
     author_email='greg@firebase.com',
     py_modules=['firebase_token_generator'],
     license='LICENSE',
-    url='https://github.com/firebase/PyFirebaseTokenGenerator',
+    url='https://github.com/firebase/firebase-token-generator-python',
     description='A utility to generate signed Firebase Authentication Tokens',
     long_description=open('README.md').read()
 )
