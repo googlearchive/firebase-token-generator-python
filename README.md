@@ -27,3 +27,7 @@ The options argument is an optional dictionary of additional properties for the 
 * simulate - (internal-only for now) if True, Firebase will run security rules but not actually make any data changes
 
 See the [Firebase Authentication Docs](https://www.firebase.com/docs/security/authentication.html) for more information about authentication tokens.
+
+License
+-------
+[MIT](http://firebase.mit-license.org)
