@@ -84,12 +84,16 @@ def _create_options_claims(opts):
             raise ValueError('Unrecognized Option: %s' % k)
     return claims
 
-def _encode(bytes):
-    if sys.version_info < (2, 7):
+if sys.version_info < (2, 7):
+    def _encode(bytes_data):
         # Python 2.6 has problems with bytearrays in b64
-        bytes = str(bytes)
-    encoded = urlsafe_b64encode(bytes)
-    return encoded.decode('utf-8').replace('=', '')
+        encoded = urlsafe_b64encode(bytes(bytes_data))
+        return encoded.decode('utf-8').replace('=', '')
+else:
+    def _encode(bytes):
+        encoded = urlsafe_b64encode(bytes)
+        return encoded.decode('utf-8').replace('=', '')
+
 
 def _encode_json(obj):
     return _encode(bytearray(json.dumps(obj), 'utf-8'))
