@@ -2,6 +2,7 @@ from array import array
 from base64 import urlsafe_b64encode
 import hashlib
 import hmac
+import sys
 try:
     import json
 except ImportError:
@@ -84,6 +85,9 @@ def _create_options_claims(opts):
     return claims
 
 def _encode(bytes):
+    if sys.version_info < (2, 7):
+        # Python 2.6 has problems with bytearrays in b64
+        bytes = str(bytes)
     encoded = urlsafe_b64encode(bytes)
     return encoded.decode('utf-8').replace('=', '')
 
