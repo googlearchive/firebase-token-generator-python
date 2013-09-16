@@ -8,6 +8,7 @@ try:
 except ImportError:
     import simplejson as json
 import time
+import datetime
 
 __all__ = ['create_token']
 
@@ -51,9 +52,9 @@ def create_token(secret, data, options=None):
         secret - the Firebase Application secret
         data - a json serializable object of data to be included in the token
         options - An optional dictionary of additional claims for the token. Possible keys include:
-            a) "expires" -- A timestamp (as a number of seconds since the epoch) denoting a time after which
-                            this token should no longer be valid.
-            b) "notBefore" -- A timestamp (as a number of seconds since the epoch) denoting a time before
+            a) "expires" -- A datetime or timestamp (as a number of seconds since the epoch) denoting a time after
+                            which this token should no longer be valid.
+            b) "notBefore" -- A datetime or timestamp (as a number of seconds since the epoch) denoting a time before
                             which this token should be rejected by the server.
             c) "admin" -- Set to true to bypass all security rules (use this for your trusted servers).
             d) "debug" -- Set to true to enable debug mode (so you can see the results of Rules API operations)
@@ -65,6 +66,8 @@ def create_token(secret, data, options=None):
         ValueError: if an invalid key is specified in options
 
     """
+    if not options and not data:
+        raise ValueError("firebase_token_generator.create_token: data is empty and no options are set.  This token will have no effect on Firebase.");
     if not options:
         options = {}
     claims = _create_options_claims(options)
@@ -78,8 +81,10 @@ def create_token(secret, data, options=None):
 def _create_options_claims(opts):
     claims = {}
     for k in opts:
+        if (isinstance(opts[k], datetime.datetime)):
+            opts[k] = int(time.mktime(opts[k].timetuple()))
         if k in CLAIMS_MAP:
-            claims[k] = opts[k]
+            claims[CLAIMS_MAP[k]] = opts[k]
         else:
             raise ValueError('Unrecognized Option: %s' % k)
     return claims

@@ -20,8 +20,8 @@ Using the library to generate a valid, signed token:
 
 The options argument is an optional dictionary of additional properties for the token. The list of possible options is:
 
-* expires - epoch time after which the token will be considered invalid
-* notBefore - epoch time before which the token will be considered invalid
+* expires - datetime or epoch time after which the token will be considered invalid
+* notBefore - datetime or epoch time before which the token will be considered invalid
 * admin - if set to True, this client will bypass security rules
 * debug - if set to True, the client will receive information about security rule execution
 * simulate - (internal-only for now) if True, Firebase will run security rules but not actually make any data changes
