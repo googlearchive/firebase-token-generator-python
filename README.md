@@ -4,7 +4,7 @@ A Python library for generating JWT that can be used for authentication in a Fir
 
 ## Installation
 
-pip install firebase-token-generator
+    pip install firebase-token-generator
 
 ## Usage
 
