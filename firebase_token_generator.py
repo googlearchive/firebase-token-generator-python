@@ -72,7 +72,7 @@ def create_token(secret, data, options=None):
         options = {}
     claims = _create_options_claims(options)
     claims['v'] = TOKEN_VERSION
-    claims['iat'] = int(time.mktime(time.gmtime()))
+    claims['iat'] = int(time.time())
     claims['d'] = data
 
     return _encode_token(secret, claims)
