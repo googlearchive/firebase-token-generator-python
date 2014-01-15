@@ -7,6 +7,7 @@ try:
     import json
 except ImportError:
     import simplejson as json
+import calendar
 import time
 import datetime
 
@@ -82,7 +83,7 @@ def _create_options_claims(opts):
     claims = {}
     for k in opts:
         if (isinstance(opts[k], datetime.datetime)):
-            opts[k] = int(time.mktime(opts[k].timetuple()))
+            opts[k] = int(calendar.timegm(opts[k].utctimetuple()))
         if k in CLAIMS_MAP:
             claims[CLAIMS_MAP[k]] = opts[k]
         else:
