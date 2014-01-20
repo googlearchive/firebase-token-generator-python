@@ -7,6 +7,7 @@ try:
     import json
 except ImportError:
     import simplejson as json
+import calendar
 import time
 import datetime
 
@@ -72,7 +73,7 @@ def create_token(secret, data, options=None):
         options = {}
     claims = _create_options_claims(options)
     claims['v'] = TOKEN_VERSION
-    claims['iat'] = int(time.mktime(time.gmtime()))
+    claims['iat'] = int(time.time())
     claims['d'] = data
 
     return _encode_token(secret, claims)
@@ -82,7 +83,7 @@ def _create_options_claims(opts):
     claims = {}
     for k in opts:
         if (isinstance(opts[k], datetime.datetime)):
-            opts[k] = int(time.mktime(opts[k].timetuple()))
+            opts[k] = int(calendar.timegm(opts[k].utctimetuple()))
         if k in CLAIMS_MAP:
             claims[CLAIMS_MAP[k]] = opts[k]
         else:
