@@ -37,7 +37,7 @@ custom_data = {"auth_data": "foo", "other_auth_data": "bar"}
 token = create_token("<YOUR_FIREBASE_SECRET>", custom_data)
 ```
 
-The arbitrary JSON object passed into `createToken()` is then available for use within your
+The arbitrary JSON object passed into `create_token()` is then available for use within your
 security rules via the [`auth` variable](https://www.firebase.com/docs/security/api/rule/auth.html).
 This is how you pass trusted authentication details (e.g. the client's user ID) into your
 Firebase rules.
@@ -45,7 +45,7 @@ Firebase rules.
 
 ## Token Options
 
-A second `options` argument can be passed to `createToken()` to modify how Firebase treats the
+A second `options` argument can be passed to `create_token()` to modify how Firebase treats the
 token. Available options are:
 
 * **expires** (number) - A timestamp (as number of seconds since the epoch) denoting the time
