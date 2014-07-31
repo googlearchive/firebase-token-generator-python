@@ -27,8 +27,8 @@ never share your Firebase Secret with a connected client.
 To generate tokens, you'll need your Firebase Secret which you can find by entering your Firebase
 URL into a browser and clicking the "Secrets" tab on the left-hand navigation menu.
 
-Once you've downloaded the library and grabbed your Firebase Secret, you can
-generate a token with this snippet of Python code:
+Once you've downloaded the library and grabbed your Firebase Secret, you can generate a token with
+this snippet of Python code:
 
 ```python
 from firebase_token_generator import create_token
@@ -37,7 +37,7 @@ custom_data = {"auth_data": "foo", "other_auth_data": "bar"}
 token = create_token("<YOUR_FIREBASE_SECRET>", custom_data)
 ```
 
-The arbitrary JSON object passed into `create_token()` is then available for use within your
+The arbitrary payload object passed into `create_token()` is then available for use within your
 security rules via the [`auth` variable](https://www.firebase.com/docs/security/api/rule/auth.html).
 This is how you pass trusted authentication details (e.g. the client's user ID) into your
 Firebase rules.
@@ -48,22 +48,20 @@ Firebase rules.
 A second `options` argument can be passed to `create_token()` to modify how Firebase treats the
 token. Available options are:
 
-* **expires** (number) - A timestamp (as number of seconds since the epoch) denoting the time
-after which this token should no longer be valid.
+* **expires** (int or datetime) - A timestamp (as number of seconds since the epoch) or `datetime`
+denoting the time after which this token should no longer be valid.
 
-* **notBefore** (number) - A timestamp (as number of seconds since the epoch) denoting the time
-before which this token should be rejected by the server.
+* **notBefore** (int or datetime) - A timestamp (as number of seconds since the epoch) or `datetime`
+denoting the time before which this token should be rejected by the server.
 
-* **admin** (boolean) - Set to `True` if you want to disable all
-security rules for this client. This will
-provide the client with read and write access to your entire Firebase.
+* **admin** (bool) - Set to `True` if you want to disable all security rules for this client. This
+will provide the client with read and write access to your entire Firebase.
 
-* **debug** (boolean) - Set to `True` to enable debug output from your security rules. This
-debug output will be automatically output to the JavaScript console. You should generally
-*not* leave this set to `True` in production (as it slows down the rules implementation and
-gives your users visibility into your rules), but it can be helpful for debugging.
+* **debug** (bool) - Set to `True` to enable debug output from your security rules. You should
+generally *not* leave this set to `True` in production (as it slows down the rules implementation
+and gives your users visibility into your rules), but it can be helpful for debugging.
 
-* **simulate** (boolean) - If `True`, Firebase will run security rules but not actually make any
+* **simulate** (bool) - If `True`, Firebase will run security rules but not actually make any
 data changes. Note that this is internal-only for now.
 
 Here is an example of how to use the second `options` argument:
