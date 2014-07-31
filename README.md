@@ -33,8 +33,8 @@ this snippet of Python code:
 ```python
 from firebase_token_generator import create_token
 
-custom_data = {"auth_data": "foo", "other_auth_data": "bar"}
-token = create_token("<YOUR_FIREBASE_SECRET>", custom_data)
+arbitrary_auth_payload = {"auth_data": "foo", "other_auth_data": "bar"}
+token = create_token("<YOUR_FIREBASE_SECRET>", arbitrary_auth_payload)
 ```
 
 The arbitrary payload object passed into `create_token()` is then available for use within your
@@ -69,7 +69,7 @@ Here is an example of how to use the second `options` argument:
 ```python
 from firebase_token_generator import create_token
 
-custom_data = {"auth_data": "foo", "other_auth_data": "bar"}
+arbitrary_auth_payload = {"auth_data": "foo", "other_auth_data": "bar"}
 options = {"admin": True}
-token = create_token("<YOUR_FIREBASE_SECRET>", custom_data, options)
+token = create_token("<YOUR_FIREBASE_SECRET>", arbitrary_auth_payload, options)
 ```
