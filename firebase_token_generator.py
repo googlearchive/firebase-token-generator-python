@@ -117,7 +117,7 @@ else:
 
 
 def _encode_json(obj):
-    return _encode(bytearray(json.dumps(obj), 'utf-8'))
+    return _encode(bytearray(json.dumps(obj, separators=(',',':')), 'utf-8'))
 
 def _sign(secret, to_sign):
     def portable_bytes(s):
