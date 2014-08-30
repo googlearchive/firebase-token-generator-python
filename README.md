@@ -33,14 +33,15 @@ this snippet of Python code:
 ```python
 from firebase_token_generator import create_token
 
-arbitrary_auth_payload = {"auth_data": "foo", "other_auth_data": "bar"}
-token = create_token("<YOUR_FIREBASE_SECRET>", arbitrary_auth_payload)
+auth_payload = {"uid": "1", "auth_data": "foo", "other_auth_data": "bar"}
+token = create_token("<YOUR_FIREBASE_SECRET>", auth_payload)
 ```
 
-The arbitrary payload object passed into `create_token()` is then available for use within your
+The payload object passed into `create_token()` is then available for use within your
 security rules via the [`auth` variable](https://www.firebase.com/docs/security/api/rule/auth.html).
 This is how you pass trusted authentication details (e.g. the client's user ID) into your
-Firebase rules.
+Firebase rules. It must contain a "uid" key, which must be a string of less than 256 chars long,
+and the generated token must be less than 1024 chars long in total.
 
 
 ## Token Options
@@ -69,7 +70,7 @@ Here is an example of how to use the second `options` argument:
 ```python
 from firebase_token_generator import create_token
 
-arbitrary_auth_payload = {"auth_data": "foo", "other_auth_data": "bar"}
+auth_payload = {"uid": "1", "auth_data": "foo", "other_auth_data": "bar"}
 options = {"admin": True}
-token = create_token("<YOUR_FIREBASE_SECRET>", arbitrary_auth_payload, options)
+token = create_token("<YOUR_FIREBASE_SECRET>", auth_payload, options)
 ```
