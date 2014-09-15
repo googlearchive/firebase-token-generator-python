@@ -67,17 +67,32 @@ def create_token(secret, data, options=None):
         ValueError: if an invalid key is specified in options
 
     """
+    if not isinstance(secret, basestring):
+        raise ValueError("firebase_token_generator.create_token: secret must be a string.")
     if not options and not data:
         raise ValueError("firebase_token_generator.create_token: data is empty and no options are set.  This token will have no effect on Firebase.");
     if not options:
         options = {}
+    is_admin_token = ('admin' in options and options['admin'] == True)
+    _validate_data(data, is_admin_token)
     claims = _create_options_claims(options)
     claims['v'] = TOKEN_VERSION
     claims['iat'] = int(time.time())
     claims['d'] = data
 
-    return _encode_token(secret, claims)
+    token = _encode_token(secret, claims)
+    if len(token) > 1024:
+        raise RuntimeError("firebase_token_generator.create_token: generated token is too long.")
+    return token
 
+def _validate_data(data, is_admin_token):
+    if data is not None and not isinstance(data, dict):
+        raise ValueError("firebase_token_generator.create_token: data must be a dictionary")
+    contains_uid = (data is not None and 'uid' in data)
+    if ((not contains_uid and not is_admin_token) or (contains_uid and not isinstance(data['uid'], basestring))):
+        raise ValueError("firebase_token_generator.create_token: data must contain a \"uid\" key that must be a string.")
+    if (contains_uid and (len(data['uid']) > 256)):
+        raise ValueError("firebase_token_generator.create_token: data must contain a \"uid\" key that must not be longer than 256 bytes.")
 
 def _create_options_claims(opts):
     claims = {}
@@ -102,7 +117,7 @@ else:
 
 
 def _encode_json(obj):
-    return _encode(bytearray(json.dumps(obj), 'utf-8'))
+    return _encode(bytearray(json.dumps(obj, separators=(',',':')), 'utf-8'))
 
 def _sign(secret, to_sign):
     def portable_bytes(s):

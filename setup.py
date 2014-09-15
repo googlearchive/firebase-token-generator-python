@@ -6,9 +6,9 @@ def read(fname):
 
 setup(
     name='firebase-token-generator',
-    version='1.3.2',
+    version='2.0.0',
     author='Greg Soltis',
-    author_email='greg@firebase.com',
+    author_email='support@firebase.com',
     zip_safe=False,
     py_modules=['firebase_token_generator'],
     license='LICENSE',
