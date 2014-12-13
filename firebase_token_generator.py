@@ -1,3 +1,7 @@
+try:
+    basestring
+except NameError:  # Python 3
+    basestring = str
 from array import array
 from base64 import urlsafe_b64encode
 import hashlib
