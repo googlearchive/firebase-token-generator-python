@@ -1,3 +1,7 @@
+try:
+    basestring
+except NameError:  # Python 3
+    basestring = str
 from firebase_token_generator import create_token
 import unittest
 
