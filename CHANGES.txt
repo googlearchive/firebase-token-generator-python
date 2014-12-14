@@ -1,2 +1,4 @@
-v1.3.2, 09/16/2013 -- Support native datetime objects for 'expires' and 'notBefore' options.
-v1.0, 01/24/2013 -- Initial Release
+v2.0.1, 2014/12/14 -- Add support for Python 3 
+v2.0.0, 2014/09/15 -- Update token generator for updated token format, and require 'uid' field.
+v1.3.2, 2013/09/16 -- Support native datetime objects for 'expires' and 'notBefore' options.
+v1.0.0, 2013/01/24 -- Initial Release
