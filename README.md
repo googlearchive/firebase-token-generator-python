@@ -1,6 +1,8 @@
 # Firebase Token Generator - Python
 
-**WARNING: This token generator is compatible with versions 1.x.x and 2.x.x of the Firebase SDK. If you are using the 3.x.x SDK, please refer to the documentation [here](https://firebase.google.com/docs/auth/server#use_a_jwt_library).**
+**This library is deprecated. Developers who are looking for a library to mint custom JWT tokens for Firebase are advised to use the [Firebase Admin SDK for Python](https://github.com/firebase/firebase-admin-python).**
+
+**WARNING: This token generator is compatible with versions 1.x.x and 2.x.x of the Firebase SDK. If you are using the 3.x.x SDK, please refer to the documentation [here](https://firebase.google.com/docs/auth/admin/create-custom-tokens#create_custom_tokens_using_a_third-party_jwt_library).**
 
 [Firebase Custom Login](https://www.firebase.com/docs/web/guide/simple-login/custom.html)
 gives you complete control over user authentication by allowing you to authenticate users
