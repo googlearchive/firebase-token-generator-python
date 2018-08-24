@@ -1,3 +1,8 @@
+# Status: Archived
+This repository has been archived and is no longer maintained.
+
+![status: inactive](https://img.shields.io/badge/status-inactive-red.svg)
+
 # Firebase Token Generator - Python
 
 **This library is deprecated. Developers who are looking for a library to mint custom JWT tokens for Firebase are advised to use the [Firebase Admin SDK for Python](https://github.com/firebase/firebase-admin-python).**
